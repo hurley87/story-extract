@@ -1,5 +1,5 @@
 import { OpenAI, OpenAIEmbedding } from "@llamaindex/openai";
-import { Settings } from "llamaindex";
+import { LLM, Settings } from "llamaindex";
 
 export function setupProvider() {
   Settings.llm = new OpenAI({
@@ -7,7 +7,7 @@ export function setupProvider() {
     maxTokens: process.env.LLM_MAX_TOKENS
       ? Number(process.env.LLM_MAX_TOKENS)
       : undefined,
-  });
+  }) as unknown as LLM;
   Settings.embedModel = new OpenAIEmbedding({
     model: process.env.EMBEDDING_MODEL,
     dimensions: process.env.EMBEDDING_DIM
